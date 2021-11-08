@@ -45,7 +45,7 @@ maindloopd : main.o libclassloops.so
 maindrec : main.o libclassrec.so
 	gcc -Wall main.o ./libclassrec.so -o maindrec -lm
 
-all : mains maindloopd maindrec	loops
+all : mains maindloopd maindrec
  
 
 
