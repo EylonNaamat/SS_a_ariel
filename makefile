@@ -11,7 +11,7 @@ basicClassification.o : basicClassification.c NumClass.h
 
 .PHONY : clean
 clean : 
-	rm *.o *.a *.so mains maindloopd maindrec
+	rm *.o *.a *.so mains maindloop maindrec
 
 main.o : main.c NumClass.h
 	gcc -c -Wall main.c 
@@ -40,12 +40,12 @@ mains : main.o libclassrec.a
 	gcc -Wall main.o ./libclassrec.a -o mains -lm
 
 maindloop : main.o libclassloops.so 
-	gcc -Wall main.o ./libclassloops.so -o maindloopd -lm
+	gcc -Wall main.o ./libclassloops.so -o maindloop -lm
 
 maindrec : main.o libclassrec.so
 	gcc -Wall main.o ./libclassrec.so -o maindrec -lm
 
-all : mains maindloopd maindrec loops
+all : mains maindloop maindrec loops
  
 
 
