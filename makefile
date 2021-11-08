@@ -1,34 +1,3 @@
-# loops : basicClassification.o advancedClassification.o NumClass.h
-# 	ar rcs -wall libclassloops.a basicClassification.o advancedClassification.o NumClass.h
-
-# recursives : basicClassification.o advancedClassificationRecursion.o NumClass.h
-# 	ar rcs -wall libclassrec.a basicClassification.o advancedClassificationRecursion.o NumClass.h
-
-# recursived:  basicClassification.o advancedClassificationRecursion.o NumClass.h
-# 	gcc -shared -wall libclassrec.so basicClassification.o advancedClassificationRecursion.o  NumClass.h
-
-# loopd : basicClassification.o advancedClassification.o NumClass.h
-# 	gcc -shared -wall basicClassification.o advancedClassification.o NumClass.h
-
-# mains : main.o libclassrec.a 
-# 	gcc -wall main.o libclassrec.a
-
-# maindloopd : main.o libclassloops.so
-# 	gcc -wall main.o libclassloops.so
-
-# maindrec : main.o libclassrec.so
-# 	gcc -wall main.o libclassrec.so
-
-# all : loops, recursives, recursived, loopd, mains, maindloopd
-
-# .PHONY : clean all
-
-# clean :
-# 	rm loops recursives recursived loopd mains maindloopd *.o
-
-# basicClassification.o : basicClassification.c 
-# 	gcc -c 
-
 
 advancedClassificationLoop.o : advancedClassificationLoop.c NumClass.h 
 	gcc -c -Wall advancedClassificationLoop.c
@@ -46,6 +15,7 @@ clean :
 
 main.o : main.c NumClass.h
 	gcc -c -Wall main.c 
+
 loops : libclassloops.a
 
 libclassloops.a : basicClassification.o advancedClassificationLoop.o 
@@ -67,13 +37,13 @@ libclassloops.so : basicClassification.o advancedClassificationLoop.o
 	gcc -shared -o libclassloops.so basicClassification.o advancedClassificationLoop.o
 
 mains : main.o libclassrec.a 
-	gcc -Wall main.o -lclassrec -L. -o mains -lm
+	gcc -Wall main.o ./libclassrec.a -o mains -lm
 
 maindloopd : main.o libclassloops.so 
-	gcc -Wall main.o -lclassloops -L. -o maindloopd -lm
+	gcc -Wall main.o ./libclassloops.so -o maindloopd -lm
 
 maindrec : main.o libclassrec.so
-	gcc -Wall main.o -lclassrec -L. -o maindrec -lm
+	gcc -Wall main.o ./libclassrec.so -o maindrec -lm
 
 all : mains maindloopd maindrec	loops
  
